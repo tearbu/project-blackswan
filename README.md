@@ -54,6 +54,24 @@ Most breach write-ups stop at what happened. This one tries to show what a Senio
 
 Evidence was graded on a four-tier hierarchy: operator primary records and code releases first, then independent technical analyses, then reputable reporting, then unverified secondary claims (used only when labelled). Findings are classified as **confirmed**, **evidenced by observed response**, or **assessment limitations**. Risks are scored on a defined 5×5 matrix, with residual ratings capped by stated discipline rules. Control gaps use a four-class taxonomy: *Absent / Ineffective / Insufficiently Evidenced / Cannot Be Established*. That matters because "we found no public evidence of this control" and "this control failed" are different statements. A credible assessor does not merge them. Full detail: [`methodology/methodology.md`](methodology/methodology.md).
 
+## How the assessment was built
+
+The work ran in a fixed order. First, the incident was reconstructed from cited public sources: operator statements and code releases, independent technical analyses, and reputable reporting, each graded on the four-tier hierarchy described above. Second, the reconstruction was turned into the working artefacts in `data\`: a risk register scored on the 5×5 matrix, a control-gap matrix across 15 domains, and a crosswalk mapping each gap to the frameworks. Third, the gaps drove a phased remediation roadmap, and the roadmap drove an audit test plan designed to verify the fixes independently, including replaying the historical forged proof as a regression case. The narrative report explains the reasoning, the board briefing compresses it, and the CSVs hold the underlying analysis in a form a reader can sort, filter, and challenge.
+
+### Decisions
+
+- **Public sources only, every claim cited.** A portfolio assessment has to be checkable by any reader, so the evidence base is public and the index names all 31 sources. The cost is real: with no internal documents, interviews, or system access, some questions can only be answered "cannot be established", and the report says so instead of filling the gap.
+- **Conflicting figures kept as attributed ranges.** The forged BNB is often reported as one headline number, but exposure created, value moved off-chain, and value unrecovered are three different measures. The report keeps them separate throughout rather than picking the largest figure.
+- **"No public evidence of a control" is not scored as "the control failed".** The gap taxonomy has separate classes for Absent, Ineffective, Insufficiently Evidenced, and Cannot Be Established. That is why the missing bridge audit report is recorded as an assurance evidence gap. It is not proof that no audit happened.
+- **Five frameworks mapped as benchmarks, SOC 2 by analogy.** The crosswalk exists so a reader can see the same gap expressed in the vocabulary of NIST CSF 2.0, SP 800-53, ISO/IEC 27001:2022, COBIT 2019, and CIS Controls v8. It is a control design comparison, not a certification finding against any of them.
+- **Analysis published as data, not only as prose.** The register, gap matrix, crosswalk, and roadmap are CSVs. A reader who disagrees with a score can re-sort the register and see exactly which judgements they would change.
+
+## Worth and lessons
+
+Most public writing about this incident stops at the exploit. The worth of this project is the part that comes after: a quantified risk register, a control environment assessment that distinguishes design gaps from evidence gaps, a remediation programme with owners and completion criteria, and an audit plan that could test whether the fix worked. That is the work a GRC function is asked to produce after an incident, and it is the work on display here.
+
+The main lesson was discipline about measures. The incident looks simple from a distance (one bug, one attacker, one number) and gets less simple the closer the evidence is read: detection that was public rather than demonstrably internal, a bridge closed for days, a fix that arrived in two stages months apart. Writing the assessment meant refusing the tidy version whenever the sources supported only the messier one. The limitations below are part of the result, not a caveat stapled to it.
+
 ## Limitations
 
 This is a public-evidence assessment. No internal BNB Chain or Binance documents were available, and there were no personnel interviews or system access. Where that limits a conclusion, the report says so. Nothing here asserts that any law or regulation was violated. Framework mappings are benchmarks for control design, not certification findings.
